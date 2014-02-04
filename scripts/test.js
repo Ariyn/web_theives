@@ -17,7 +17,7 @@ var tileSize = 20;
 
 var characters = [{x:0,y:0,color:"red",xMov:0,yMov:0,lookAt:0,walkSpeed:2,runSpeed:4,isRun:false,fireGun:null,money:0,gun:{item:null,type:"pistol",leftClip:8}},{x:250,y:140,color:"blue",xMov:0,yMov:0,lookAt:0,movSpeed:5}];
 var pointer = {x:0,y:0,size:20,color:"red",thick:3};
-var map = [];
+var map = null;
 var effect = []; //such as broken glass, blood, etc...
 /*
 location, color, size
@@ -32,7 +32,12 @@ start Location, target Location, dMovement, type, hit
 var fps = 60;
 
 var gl;
-
+var mapData = [	[100,	100,	0,		500, 	2,		'wall'],
+				[100,	600,	500,	0,		2,		'wall'],
+				[600,	600,	0,		-500,	2,		'wall'],
+				[600,	100,	-500,	0,		2,		'wall'],
+				[350,	100,	0,		500,	2,		'wall'],
+				[350,	300,	null,	null,	null,	'door']];
 
 function reload(character){
 	character.gun.leftClip = 8;
@@ -98,6 +103,12 @@ function checkHit(x, y, size, a, b){
 }
 
 function startFunc(){
+	map = new Map(600,1);
+	for(var list in mapData){
+		var tempMap = mapData[list];
+		map.makeMap(null,tempMap[0],tempMap[1],tempMap[2],tempMap[3],tempMap[4],tempMap[5]);
+	}
+
 	var sin = Math.sin(Math.PI / 4);
 	var cos = Math.cos(Math.PI / 4);
 	canvas = document.getElementById("canvas");
@@ -202,20 +213,43 @@ function startFunc(){
 	},false);
 
 	setInterval(function(){
-		mainLoop();
+		mainLoop(ctx);
 	},1000/fps);
 	
 }
 
-function mainLoop(){
+function mainLoop(ctx){
 	canvas.width = canvas.width;
-	strokeTiles(-500,-350,canvasStat.width,canvasStat.height,tileSize,"black");
+	//strokeTiles(-500,-350,canvasStat.width,canvasStat.height,tileSize,"black");
 
+	drawMap(ctx);
 	drawEffect();
 	physicsCalc(characters);
 	drawCharacter(characters);
 	drawPointer();
 
+}
+
+function drawMap(ctx){
+	ctx.beginPath();
+	for(var list in map.mapData){
+		var tempMap = map.mapData[list];
+		switch(tempMap.type){
+			case 'door':
+				ctx.moveTo(tempMap.x - 10,tempMap.y - 10);
+				ctx.lineTo(tempMap.x + 10,tempMap.y - 10);
+				ctx.lineTo(tempMap.x + 10,tempMap.y + 10);
+				ctx.lineTo(tempMap.x - 10,tempMap.y + 10);
+				ctx.lineTo(tempMap.x - 10,tempMap.y - 10);
+				break;
+			case 'wall':
+				ctx.strokeStyle ="black";
+				ctx.moveTo(tempMap.x,tempMap.y);
+				ctx.lineTo(tempMap.x + tempMap.width,tempMap.y + tempMap.height);
+				break;
+		}
+	}
+	ctx.stroke();
 }
 
 function drawEffect(){
@@ -332,3 +366,45 @@ function MinLiteGraphic(ctx,bufferCtx){
 		this.ctx.fillRect(x-loc,y-loc,size,size);
 	};
 }
+
+function Map(size,type){
+	this.size = size;
+	this.type = type;
+	this.mapData = [];
+	/*map data will hold the data about map
+	such as walls, interactive objects, etc
+	
+	x,y,width,height,thickness,objectType
+
+	if there is no x or y or both, it means last element's finish point.
+	if it is not wall but items or something doesn't need thickness, width and height it holds null;
+	*/
+
+	this.createMap = function(array){
+		this.mapData = array;
+	}
+
+	this.makeMap = function(data, x, y, width, height, tks, type){
+		var tempData = null;
+		var tempType = type;
+		
+		if(!type)
+			tempType = 'normal';
+		tempData = {x:x,y:y,width:width,height:height,thickness:tks,type:tempType,data:data};
+
+		console.log("tet");
+		this.mapData.push(tempData);
+	}
+}
+
+/*
+map examples
+
+{0,		0,		0,		500, 	2,		'wall'},
+{null,	null,	500,	0,		2,		'wall'},
+{null,	null,	0,		-500,	2,		'wall'},
+{null,	null,	500,	0,		2,		'wall'},
+{250,	0,		0,		500,	2,		'wall'},
+{250,	250,	null,	null,	null,	'door'}
+
+*/
