@@ -15,7 +15,7 @@ var screenStat = {x:0,y:0};
 var start = true;
 var tileSize = 20;
 
-var characters = [{x:0,y:0,color:"red",xMov:0,yMov:0,lookAt:0,walkSpeed:3,runSpeed:4,isRun:false,fireGun:null,money:0,gun:{item:null,type:"pistol",leftClip:8}},{x:250,y:140,color:"blue",xMov:0,yMov:0,lookAt:0,movSpeed:5}];
+var characters = [{x:50,y:50,color:"red",xMov:0,yMov:0,lookAt:0,walkSpeed:3,runSpeed:4,isRun:false,fireGun:null,money:0,gun:{item:null,type:"pistol",leftClip:8}},{x:250,y:140,color:"blue",xMov:0,yMov:0,lookAt:0,movSpeed:5}];
 var pointer = {x:0,y:0,size:20,color:"red",thick:3};
 var map = null;
 var effect = []; //such as broken glass, blood, etc...
@@ -68,6 +68,21 @@ function fireGun(character,speed){
 	var b = pointer.y - a * pointer.x;
 	for(var list in characters){
 		var chars = characters[list];
+		if(chars == character){
+			continue;
+		}
+
+		var isHit = checkHit(chars.x,chars.y,tileSize,a,b);
+		if(isHit){
+			locDs.x = chars.x;
+			locDs.y = chars.y;
+		} else {
+			
+		}
+	}
+
+	for(var list in map.mapData){
+		var chars = map.mapData[list];
 		if(chars == character){
 			continue;
 		}
@@ -306,12 +321,10 @@ function drawPointer(){
 }
 
 function coliCheck(object){
+	return false;
 	for(var list in map.mapData){
 		var tempMap = map.mapData[list];
 		var tks = tempMap.thickness/2;
-		if(object.y + tileSize <= tempMap.y || object.y >= tempMap.y){
-			console.log('collision');
-		}
 	}
 	
 	return {x:false,y:false};
@@ -390,7 +403,9 @@ function Map(size,type){
 	this.size = size;
 	this.type = type;
 	this.mapData = [];
-	/*map data will hold the data about map
+	
+	/*
+	map data will hold the data about map
 	such as walls, interactive objects, etc
 	
 	x,y,width,height,thickness,objectType
