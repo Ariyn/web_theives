@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>web thieves</title>
+		<script src="./scripts/jquery.2.1.0.min.js"></script>
+		<script src="./scripts/item.js"></script>
+		<script src="./scripts/test.js"></script>
+
+		<STYLE>
+		#controlPanel{
+			position:absolute;
+			z-index:1;
+			left:0px;
+			top:0px;
+		}
+		#nextTurn span{
+			font-size:30px;
+		}
+		#canvas {
+			cursor: none;
+		}
+		</STYLE>
+	</head>
+
+	<body onload="startFunc();">
+		<div id="controlPanel">
+			<div id="fps"></div>
+		</div>
+		<canvas id="canvas" width="900px" height="1024px" style="border:1px solid black"></canvas>
+		<div id="infoPanel" width="900px" style="border:1px solid">
+			<div id="bullet">
+				<span>남은 총알 : </span><span class="info">8</span>
+			</div>
+		</div>
+	</body>
+</html>

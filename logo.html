@@ -1,0 +1,373 @@
+<html>
+	<head>
+		<title>web thieves</title>
+		<script src="./scripts/logo.js"></script>
+		<STYLE>
+
+		/*느리고 어둡고 폰트*/
+		body{
+
+			overflow: hidden;
+			background-color: #525437;
+		}
+		img{
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+
+			-webkit-user-drag: none;
+			user-drag: none;
+		}
+
+		#logo{
+			 width:100%;
+			 height:100%;
+			 position:absolute;
+		}
+
+		.front{
+			/*display:none;*/
+		}
+		.behind{
+			opacity:0.4;
+			filter:alpha(opacity=40); /* For IE8 and earlier */
+		}
+
+		.letterBox{
+			position:absolute;
+			width:100%;
+			left:70px;
+			top:300px;
+			z-index:2;
+		}
+
+		.mutopiaText{
+			position:absolute;
+			font-size:450px;
+			color:#363362;
+
+			visibility:hidden;
+
+			-webkit-animation:moveDown 30s ease infinite;
+			-moz-animation:moveDown 30s ease infinite;
+			animation:moveDown 30s ease infinite;
+		}
+		.artText{
+			position:absolute;
+			top:450px;
+			font-size:150px;
+			color:#541F1F;
+
+			visibility:hidden;
+
+			-webkit-animation:moveDown 30s ease infinite;
+			-moz-animation:moveDown 30s ease infinite;
+			animation:moveDown 30s ease infinite;
+		}
+		.teamText{
+			position:absolute;
+			top:450px;
+			font-size:150px;
+			color:#2C5B4A;
+
+			visibility:hidden;
+
+			-webkit-animation:moveDown 30s ease infinite;
+			-moz-animation:moveDown 30s ease infinite;
+			animation:moveDown 30s ease infinite;
+		}
+
+		#logo1{/*M*/
+			left:0px;
+			-webkit-animation-delay:0s;
+			-moz-animation-delay:0s;
+		}
+		#logo2{/*u*/
+			left:360px;
+			-webkit-animation-delay:1s;
+			-moz-animation-delay:1s;
+		}
+		#logo3{/*T*/
+			left:600px;
+			-webkit-animation-delay:3s;
+			-moz-animation-delay:3s;
+		}
+		#logo4{/*o*/
+			left:820px;
+			-webkit-animation-delay:1s;
+			-moz-animation-delay:1s;
+		}
+		#logo5{/*p*/
+			left:1100px;
+			-webkit-animation-delay:6s;
+			-moz-animation-delay:6s;
+		}
+		#logo6{/*i*/
+			left:1350px;
+			-webkit-animation-delay:9s;
+			-moz-animation-delay:9s;
+		}
+		#logo7{/*a*/
+			left:1450px;
+			-webkit-animation-delay:9s;
+			-moz-animation-delay:9s;
+		}
+
+		#logo8{/*A*/
+			left:1160px;
+			-webkit-animation-delay:12s;
+			-moz-animation-delay:12s;
+		}
+		#logo9{/*R*/
+			left:1260px;
+			-webkit-animation-delay:12.2s;
+			-moz-animation-delay:12.2s;
+		}
+		#logo10{/*T*/
+			left:1330px;
+			-webkit-animation-delay:12.4s;
+			-moz-animation-delay:12.4s;
+		}
+		
+		#logo11{/*T*/
+			left:1430px;
+			-webkit-animation-delay:12.8s;
+			-moz-animation-delay:12.8s;
+		}
+		#logo12{/*E*/
+			left:1490px;
+			-webkit-animation-delay:13s;
+			-moz-animation-delay:13s;
+		}
+		#logo13{/*A*/
+			left:1570px;
+			-webkit-animation-delay:13.2s;
+			-moz-animation-delay:13.2s;
+		}
+		#logo14{/*M*/
+			left:1650px;
+			-webkit-animation-delay:13.4s;
+			-moz-animation-delay:13.4s;
+		}
+
+		.gears{
+			-webkit-animation:spin 2s linear infinite ;
+		    -moz-animation:spin 2s linear infinite ;
+		    animation:spin 2s linear infinite ;
+		}
+
+		.gearsB{
+			-webkit-animation:spinB 1s linear infinite ;
+			-moz-animation:spinB 1s linear infinite ;
+			animation:spinB 1s linear infinite ;		
+		}
+
+		#bigGear1{
+			position:absolute;
+			top:0px;
+			left:300px;
+			width:700px;
+			height:700px;
+		}
+		#bigGear2{
+			position:absolute;
+			top:450px;
+			left:-150px;
+			width:700px;
+			height:700px;
+		}
+		#bigGear3{
+			position:absolute;
+			top:820px;
+			left:680px;
+			width:700px;
+			height:700px;
+		}
+		#bigGear4{
+			position:absolute;
+			top:-60px;
+			left:900px;
+			width:700px;
+			height:700px;
+
+			-moz-animation-duration : 2s;
+			-webkit-animation-duration : 2s;
+			animation-duration : 2s;
+		}
+		#bigGear5{
+			position:absolute;
+			top:540px;
+			left:1220px;
+			width:700px;
+			height:700px;
+
+			-moz-animation-duration : 2s;
+			-webkit-animation-duration : 2s;
+			animation-duration : 2s;
+		}
+		#bigGear6{
+			position:absolute;
+			top:-340px;
+			left:1430px;
+			width:700px;
+			height:700px;
+		}
+		#bigGear7{
+			position:absolute;
+			top:0px;
+			left:0px;
+			width:700px;
+			height:700px;
+			-moz-animation-duration : 10s;
+			-webkit-animation-duration : 10s;
+			animation-duration : 10s;
+		}
+		#bigGear8{
+			position:absolute;
+			top:480px;
+			left:385px;
+			width:700px;
+			height:700px;
+
+			-moz-animation-duration : 10s;
+			-webkit-animation-duration : 10s;
+			animation-duration : 10s;
+		}
+		#bigGear9{
+			position:absolute;
+			top:180px;
+			left:950px;
+			width:900px;
+			height:900px;
+
+			-moz-animation-duration : 10s;
+			-webkit-animation-duration : 10s;
+			animation-duration : 10s;
+		}
+
+		#smallGear1{
+			position:absolute;
+			top:145px;
+			left:0px;
+			width:400px;
+			height:400px;
+		}
+		#smallGear2{
+			position:absolute;
+			top:-150px;
+			left:-60px;
+			width:400px;
+			height:400px;
+
+			-moz-animation-duration : 1s;
+			-webkit-animation-duration : 1s;
+			animation-duration : 1s;
+		}
+		#smallGear3{
+			position:absolute;
+			top:535px;
+			left:690px;
+			width:400px;
+			height:400px;
+		}
+		#smallGear4{
+			position:absolute;
+			top:830px;
+			left:400px;
+			width:400px;
+			height:400px;
+		}
+		#smallGear5{	
+			position:absolute;
+			top:280px;
+			left:1590px;
+			width:400px;
+			height:400px;
+
+			-moz-animation-duration : 1s;
+			-webkit-animation-duration : 1s;
+			animation-duration : 1s;
+		}
+
+		/*
+		@-moz-keyframes moveDown{
+			0% {-moz-transform: translate(0,-1200px);}
+			40% {-moz-transform:translate(0,1200px);}
+			100% {-moz-transform:translate(0,500px);}
+		}*/
+		@-webkit-keyframes moveDown{
+			0% {transform: translate(0,-1200px);}
+			20% {transform:translate(0,200px);}
+			70% {transform:translate(0,-100px);}
+			100% {transform:translate(0,0px);}
+		}
+		@keyframes moveDown{
+			0% {transform: translate(0,-1200px); visibility:visible;}
+			3% {transform:translate(0,200px);}
+			7% {transform:translate(0,-100px);}
+			10% {transform:translate(0,0px);}
+		}
+
+		@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+		@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+		@keyframes spin { 100% { transform: rotate(360deg); transform:rotate(360deg); } }
+
+		@-moz-keyframes spinB {from {-moz-transform: rotate(360deg);} to {-moz-transform: rotate(0deg);}}
+		@-webkit-keyframes spinB { from { -webkit-transform: rotate(360deg);} to {-webkit-transform: rotate(0deg);} }
+		@keyframes spinB { from {transform: rotate(360deg);} to {transform: rotate(0deg);}  }
+
+		</STYLE>
+	</head>
+
+	<body onload="startFunc();">
+		<div id="logo">
+			<div class="letterBox">
+				<span id="logo1" class="mutopiaText">M</span>
+				<span id="logo2" class="mutopiaText">u</span>
+				<span id="logo3" class="mutopiaText">T</span>
+				<span id="logo4" class="mutopiaText">o</span>
+				<span id="logo5" class="mutopiaText">p</span>
+				<span id="logo6" class="mutopiaText">i</span>
+				<span id="logo7" class="mutopiaText">a</span>
+				
+				<span id="logo8" class="artText">A</span>
+				<span id="logo9" class="artText">r</span>
+				<span id="logo10" class="artText">t</span>
+
+				<span id="logo11" class="teamText">T</span>
+				<span id="logo12" class="teamText">e</span>
+				<span id="logo13" class="teamText">a</span>
+				<span id="logo14" class="teamText">m</span>
+			</div>
+			<div class="gearBox">
+				<div class="front">
+					<img id="smallGear1" class="gearsB" src="./gear8.png" />
+					<img id="smallGear2" class="gears" src="./gear8.png" />
+					<img id="smallGear3" class="gearsB" src="./gear8.png" />
+					<img id="smallGear4" class="gearsB" src="./gear8.png" />
+					<img id="smallGear5" class="gearsB" src="./gear8.png" />
+					<img id="bigGear1" class="gears" src="./gear16.png" />
+					<img id="bigGear2" class="gears" src="./gear16.png" />
+					<img id="bigGear3" class="gears" src="./gear16.png" />
+					<img id="bigGear4" class="gearsB" src="./gear16.png" />
+					<img id="bigGear5" class="gearsB" src="./gear16.png" />
+					<img id="bigGear6" class="gears" src="./gear16.png" />
+				</div>
+				<div class="behind">
+					<img id="bigGear7" class="gears" src="./gear16.png" />
+					<img id="bigGear8" class="gearsB" src="./gear16.png" />
+					<img id="bigGear9" class="gears" src="./gear16.png" />
+				</div>
+			</div>
+
+		</div>
+	</body>
+</html>
+
+<!--
+	-moz-animation-name : spinB, moveDown;
+	-moz-animation-duration : 1s, 10s;
+	-moz-animation-timing-function : linear, ease;
+	-moz-animation-iteration-count : infinite, 1;
+-->
