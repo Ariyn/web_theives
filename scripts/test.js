@@ -15,7 +15,7 @@ var screenStat = {x:0,y:0};
 var start = true;
 var tileSize = 20;
 
-var characters = [{x:0,y:0,color:"red",xMov:0,yMov:0,lookAt:0,walkSpeed:2,runSpeed:4,isRun:false,fireGun:null,money:0,gun:{item:null,type:"pistol",leftClip:8}},{x:250,y:140,color:"blue",xMov:0,yMov:0,lookAt:0,movSpeed:5}];
+var characters = [{x:0,y:0,color:"red",xMov:0,yMov:0,lookAt:0,walkSpeed:3,runSpeed:4,isRun:false,fireGun:null,money:0,gun:{item:null,type:"pistol",leftClip:8}},{x:250,y:140,color:"blue",xMov:0,yMov:0,lookAt:0,movSpeed:5}];
 var pointer = {x:0,y:0,size:20,color:"red",thick:3};
 var map = null;
 var effect = []; //such as broken glass, blood, etc...
@@ -32,11 +32,11 @@ start Location, target Location, dMovement, type, hit
 var fps = 60;
 
 var gl;
-var mapData = [	[100,	100,	0,		500, 	2,		'wall'],
-				[100,	600,	500,	0,		2,		'wall'],
-				[600,	600,	0,		-500,	2,		'wall'],
-				[600,	100,	-500,	0,		2,		'wall'],
-				[350,	100,	0,		500,	2,		'wall'],
+var mapData = [	[100,	100,	0,		500, 	5,		'wall'],
+				[100,	600,	500,	0,		5,		'wall'],
+				[600,	600,	0,		-500,	5,		'wall'],
+				[600,	100,	-500,	0,		5,		'wall'],
+				[350,	100,	0,		500,	5,		'wall'],
 				[350,	300,	null,	null,	null,	'door']];
 
 function reload(character){
@@ -232,10 +232,13 @@ function mainLoop(ctx){
 
 function drawMap(ctx){
 	ctx.beginPath();
+
 	for(var list in map.mapData){
 		var tempMap = map.mapData[list];
 		switch(tempMap.type){
 			case 'door':
+				ctx.stroke();
+				ctx.lineWidth = 2;
 				ctx.moveTo(tempMap.x - 10,tempMap.y - 10);
 				ctx.lineTo(tempMap.x + 10,tempMap.y - 10);
 				ctx.lineTo(tempMap.x + 10,tempMap.y + 10);
@@ -243,7 +246,11 @@ function drawMap(ctx){
 				ctx.lineTo(tempMap.x - 10,tempMap.y - 10);
 				break;
 			case 'wall':
+				ctx.stroke();
+				
+				ctx.lineWidth = tempMap.thickness;
 				ctx.strokeStyle ="black";
+
 				ctx.moveTo(tempMap.x,tempMap.y);
 				ctx.lineTo(tempMap.x + tempMap.width,tempMap.y + tempMap.height);
 				break;
@@ -298,10 +305,22 @@ function drawPointer(){
 	ctx.lineWidth = 1;
 }
 
+function coliCheck(object){
+	for(var list in map.mapData){
+		var tempMap = map.mapData[list];
+		var tks = tempMap.thickness/2;
+		if(object.y + tileSize <= tempMap.y || object.y >= tempMap.y){
+			console.log('collision');
+		}
+	}
+	
+	return {x:false,y:false};
+}
+
 function physicsCalc(characters){
 	characters[0].x += characters[0].xMov;
 	characters[0].y += characters[0].yMov;
-
+	coliCheck(characters[0]);
 	for(var list in bullets){
 		var bul = bullets[list];
 		bul.locP.x += bul.movD.x;
